@@ -24,7 +24,12 @@ testsParser = test [
 
 testsGrafo = test [
   [1] ~~? (nodos (agNodo 1 vacio)),
-  [1,2] ~~? (nodos (agNodo 2 (agNodo 1 vacio)))
+  [1,2] ~~? (nodos (agNodo 2 (agNodo 1 vacio))),
+
+  [] ~~? (vecinos (agNodo 1 vacio) 1),
+  [] ~~? (vecinos (agEje (2,1) (agNodo 1 vacio)) 1),
+  [] ~~? (vecinos (agEje (1,1) (agNodo 1 vacio)) 2),
+  [1] ~~? (vecinos (agEje (1,1) (agNodo 1 vacio)) 1)
   ]
 
 ---------------
