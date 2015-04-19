@@ -37,8 +37,9 @@ agEje (s, d) (G ns f) | valid_nodes = G ns new_f
       new_f = (\x -> if x == s then add_if_not_present d (f x) else (f x))
 
 -- Ejercicio 7
-lineal :: [a] -> Grafo a
-lineal = undefined
+lineal :: Eq a => [a] -> Grafo a
+lineal ns = foldr add_edges vacio (zip ns $ tail ns)
+    where add_edges = \(x,y) res -> agEje (x,y) (agNodo x (agNodo y res))
 
 -- Ejercicio 8
 union :: Grafo a -> Grafo a -> Grafo a
