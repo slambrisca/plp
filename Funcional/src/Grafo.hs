@@ -1,4 +1,5 @@
 module Grafo (Grafo, vacio, nodos, vecinos, agNodo, sacarNodo, agEje, lineal, union, clausura) where
+import qualified Data.List as List
 
 data Grafo a = G [a] (a -> [a])
 
@@ -25,8 +26,12 @@ agNodo :: Eq a => a -> Grafo a -> Grafo a
 agNodo n (G ns f) = G (add_if_not_present n ns) f
 
 -- Ejercicio 5
-sacarNodo :: a -> Grafo a -> Grafo a
-sacarNodo a (G ns f) = undefined
+sacarNodo :: Eq a => a -> Grafo a -> Grafo a
+sacarNodo a (G ns f) = G clean_nodes new_f
+    where
+      clean_nodes = List.delete a ns
+      node_neighbor_pairs = map (\x -> (x, f x)) clean_nodes
+      new_f = foldr (\(n,nbr) res_g -> (\x -> if x == n then nbr else (res_g x))) (\_ -> []) node_neighbor_pairs
 
 -- Ejercicio 6
 agEje :: Eq a => (a,a) -> Grafo a -> Grafo a
