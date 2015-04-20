@@ -44,8 +44,9 @@ lineal ns = foldr add_edges vacio (zip ns $ tail ns)
     where add_edges = \(x,y) res -> agEje (x,y) (agNodo x (agNodo y res))
 
 -- Ejercicio 8
-union :: Grafo a -> Grafo a -> Grafo a
-union = undefined
+union :: Eq a => Grafo a -> Grafo a -> Grafo a
+union (G ns1 r1) (G ns2 r2) = G (List.nub (ns1 ++ ns2)) (unionRel r1 r2)
+  where unionRel r1 r2 = \x -> List.nub ((r1 x) ++ (r2 x))
 
 -- Ejercicio 9
 clausura :: Grafo a -> Grafo a
