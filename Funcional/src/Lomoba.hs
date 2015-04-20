@@ -40,5 +40,6 @@ quitar = undefined
 
 -- Ejercicio 16
 cierto :: Modelo -> Exp -> Bool
-cierto = undefined
+cierto (K grafo f) exp = all (\w -> eval model w exp) (nodos grafo)
+  where model = K grafo f
 
