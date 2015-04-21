@@ -24,14 +24,42 @@ testsParser = test [
   (B (And (Var "p") (Var "q")))   ~=? (parse "[](p && q)")
   ]
 
+
+
+
 testsGrafo = test [
+  -- Test Nodos --
+  -- [] ~~? (nodos vacio), -- No se puede testear por un problema de tipos
   [1] ~~? (nodos (agNodo 1 vacio)),
   [1,2] ~~? (nodos (agNodo 2 (agNodo 1 vacio))),
 
+  -- Test Vecinos --
   [] ~~? (vecinos (agNodo 1 vacio) 1),
   [] ~~? (vecinos (agEje (2,1) (agNodo 1 vacio)) 1),
   [] ~~? (vecinos (agEje (1,1) (agNodo 1 vacio)) 2),
-  [1] ~~? (vecinos (agEje (1,1) (agNodo 1 vacio)) 1)
+  [1] ~~? (vecinos (agEje (1,1) (agNodo 1 vacio)) 1),
+
+  -- Test sacarNodo --
+  [] ~~? (nodos (sacarNodo 1 vacio)),
+  [] ~~? (nodos (sacarNodo 1 (agNodo 1 vacio))),
+  [1..4] ~~? (nodos (sacarNodo 5 (lineal [1..5]))),
+  [] ~~? (vecinos (sacarNodo 5 (lineal [1..5])) 4),
+
+  -- Test lineal --
+  [9] ~~? (nodos (lineal [9])),
+  [1..4] ~~? (nodos (lineal [1..4])),
+  [2] ~~? (vecinos (lineal [1..4]) 1),
+  [] ~~? (vecinos (lineal [1..4]) 4),
+
+  -- Test union --
+  [1] ~~? (nodos (union vacio (lineal [1]))),
+  [1,2] ~~? (nodos (union (lineal [2]) (lineal [1]))),
+  [1..10] ~~? (nodos (union (lineal [5..10]) (lineal [1..5]))),
+  [] ~~? (vecinos (union vacio (lineal [1])) 1),
+  [] ~~? (vecinos (union (lineal [2]) (lineal [1])) 1),
+  [6] ~~? (vecinos (union (lineal [5..10]) (lineal [1..5])) 5)
+
+  -- Test Clausura --
   ]
 
 
