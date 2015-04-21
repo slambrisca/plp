@@ -68,8 +68,6 @@ vecinosClausura fvs = (puntofijo  vecinosDeLista)
 	where vecinosDeLista = (\x -> List.nub (concat (x:(map fvs x))))
 
 
-g = (agEje (5,7) (agEje (4,6) (agEje (3,5) (agEje (2,4) (agEje (1,2) (G [1,2,3,4,5,6,7] (\n -> [])))))))
-
 ---- PRIVATE FUNCTIONS ----
 
 puntofijo :: Eq a => (a -> a) -> (a -> a)

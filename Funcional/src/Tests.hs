@@ -57,9 +57,26 @@ testsGrafo = test [
   [1..10] ~~? (nodos (union (lineal [5..10]) (lineal [1..5]))),
   [] ~~? (vecinos (union vacio (lineal [1])) 1),
   [] ~~? (vecinos (union (lineal [2]) (lineal [1])) 1),
-  [6] ~~? (vecinos (union (lineal [5..10]) (lineal [1..5])) 5)
+  [6] ~~? (vecinos (union (lineal [5..10]) (lineal [1..5])) 5),
 
   -- Test Clausura --
+	[1,2,3,4] ~~? (nodos (clausura (lineal [1,2,3,4]))),
+	[1,2,3,4] ~~? (vecinos (clausura (lineal [1,2,3,4])) 1),
+	[2,3,4] ~~? (vecinos (clausura (lineal [1,2,3,4])) 2),
+	[3,4] ~~? (vecinos (clausura (lineal [1,2,3,4])) 3),
+	[4] ~~? (vecinos (clausura (lineal [1,2,3,4])) 4),
+	
+	
+	[1,2,3,4,5,6,7] ~~? (nodos (clausura (union (lineal [1,2,3,4]) (lineal [1,5,6,7])))),
+	[1,2,3,4,5,6,7] ~~? (vecinos (clausura (union (lineal [1,2,3,4]) (lineal [1,5,6,7]))) 1),
+	[2,3,4] ~~? (vecinos (clausura (union (lineal [1,2,3,4]) (lineal [1,5,6,7]))) 2),
+	[3,4] ~~? (vecinos (clausura (union (lineal [1,2,3,4]) (lineal [1,5,6,7]))) 3),
+	[4] ~~? (vecinos (clausura (union (lineal [1,2,3,4]) (lineal [1,5,6,7]))) 4),
+	[5,6,7] ~~? (vecinos (clausura (union (lineal [1,2,3,4]) (lineal [1,5,6,7]))) 5),
+	[6,7] ~~? (vecinos (clausura (union (lineal [1,2,3,4]) (lineal [1,5,6,7]))) 6),
+	[7] ~~? (vecinos (clausura (union (lineal [1,2,3,4]) (lineal [1,5,6,7]))) 7)
+
+  
   ]
 
 
