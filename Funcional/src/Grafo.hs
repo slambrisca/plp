@@ -40,6 +40,7 @@ agEje (s, d) (G ns f) | valid_nodes = G ns new_f
 
 -- Ejercicio 7
 lineal :: Eq a => [a] -> Grafo a
+lineal (n:[]) = G [n] (\_ -> [])
 lineal ns = foldr add_edges vacio (zip ns $ tail ns)
     where add_edges = \(x,y) res -> agEje (x,y) (agNodo x (agNodo y res))
 
