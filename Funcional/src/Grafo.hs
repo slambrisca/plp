@@ -70,6 +70,13 @@ vecinosClausura fvs = (puntofijo  vecinosDeLista)
 
 ---- PRIVATE FUNCTIONS ----
 
+-- Que carajo es?? iterate devuelve una lista infinita con el sig rtdo de aplicar f sobre el x anterior.
+-- Como para? con "group" agrupo los resultados, es decir, pone los rtdos iguales en una lista y te devuelve
+-- por ej para [1,2,3,2] -> [[1],[2,2],[3]].
+-- en nuestro caso seria [1,2,3,3..] -> [[1],[2],[3,3]]
+-- De eso, tenemos que devolver el primero que tiene longitud mayor a 1. Es decir, filtro para sacar los de longitud 1,
+-- y tomo la primer lista de rtdos repetidos (el punto fijo). El resultado de la funcion es cualquiera de esa lista. En particular la cabeza.
+
 puntofijo :: Eq a => (a -> a) -> a -> a
 puntofijo f x = head (head ( filter (\a -> (length (take 2 a))>1) (List.group (iterate (f) x))))
 --(\x -> if x == (f x) then x else ((puntofijo f) (f x)))
