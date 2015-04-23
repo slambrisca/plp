@@ -70,8 +70,9 @@ vecinosClausura fvs = (puntofijo  vecinosDeLista)
 
 ---- PRIVATE FUNCTIONS ----
 
-puntofijo :: Eq a => (a -> a) -> (a -> a)
-puntofijo f = (\x -> if x == (f x) then x else ((puntofijo f) (f x)))
+puntofijo :: Eq a => (a -> a) -> a -> a
+puntofijo f x = head (head ( filter (\a -> (length (take 2 a))>1) (List.group (iterate (f) x))))
+--(\x -> if x == (f x) then x else ((puntofijo f) (f x)))
 
 
 -- Agrega un elemento a una lista si este no pertenece a la misma
